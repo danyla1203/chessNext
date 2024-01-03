@@ -1,4 +1,7 @@
 import { WebSocketProvider } from './lib/context/SocketContext';
+import { UserProvider } from "./lib/context/UserContext";
+
+import './globals.css';
 
 export default async function RootLayout({
   children,
@@ -8,7 +11,9 @@ export default async function RootLayout({
   return (
     <html>
       <body>
-        <WebSocketProvider>{children}</WebSocketProvider>
+        <WebSocketProvider>
+          <UserProvider>{children}</UserProvider>
+        </WebSocketProvider>
       </body>
     </html>
   );
