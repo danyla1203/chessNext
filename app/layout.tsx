@@ -6,10 +6,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <WebSocketProvider>
-      <html>
-        <body>{ children }</body>
-      </html>
-    </WebSocketProvider>
+    <html>
+      <body>
+        <WebSocketProvider>{children}</WebSocketProvider>
+      </body>
+    </html>
   );
 }
