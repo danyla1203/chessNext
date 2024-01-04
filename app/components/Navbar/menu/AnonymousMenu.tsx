@@ -22,7 +22,7 @@ export function AnonymousMenu({ anchor, handleClick, handleClose }: any) {
           id="navbar__user__dropdown"
         >
           <MenuItem onClick={handleClose}>
-            <Link href="/signup">Login</Link>
+            <Link href="/authorization">Login</Link>
           </MenuItem>
         </Menu>
       </ClickAwayListener>

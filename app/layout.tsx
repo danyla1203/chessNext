@@ -1,5 +1,5 @@
 import { WebSocketProvider } from './lib/context/SocketContext';
-import { Navbar } from "./ui/Navbar/Navbar";
+import { Navbar } from "@/components/Navbar/Navbar";
 
 import './globals.css';
 
