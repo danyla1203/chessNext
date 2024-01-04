@@ -1,5 +1,5 @@
 import { WebSocketProvider } from './lib/context/SocketContext';
-import { UserProvider } from "./lib/context/UserContext";
+import { Navbar } from "./ui/Navbar/Navbar";
 
 import './globals.css';
 
@@ -11,8 +11,9 @@ export default async function RootLayout({
   return (
     <html>
       <body>
+        <Navbar/>
         <WebSocketProvider>
-          <UserProvider>{children}</UserProvider>
+          {children}
         </WebSocketProvider>
       </body>
     </html>
