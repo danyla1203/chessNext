@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useEffect, useState } from "react";
-import { getProfile } from "../request/userProfile";
+import { getProfile } from "@/app/lib/request";
 
 type Profile = {
   id: number;

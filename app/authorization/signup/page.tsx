@@ -12,8 +12,11 @@ export default function Signup() {
   const { profile } = useContext(UserContext);
 
   const verifyEmail = async () => {
-    const res = await emailVerification({ email });
-    if (res.message === 'ok') router.push('/signup/mail-sent');
+    const res = await emailVerification(email);
+    
+    if (res.message === 'ok') {
+      router.push(`/authorization/signup/confirm-code?code=${res.code}&email=${res.email}`);
+    }
   }
 
   useEffect(() => {

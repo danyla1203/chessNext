@@ -1,11 +1,10 @@
 'use client'
 
 import { useState, useEffect } from 'react';
-import { userLogin } from '@/request/login';
-import { getProfile } from '@/request/userProfile';;
 import { useRouter } from 'next/navigation'
 import React from 'react';
 import { UserContext } from '@/app/lib/context/UserContext';
+import { userLogin, getProfile } from '@/app/lib/request';
 
 export default function Login() {
   const [ email, setEmail ] = useState('');

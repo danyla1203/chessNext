@@ -5,6 +5,9 @@ export const emailVerification = async (email: string) => {
       await fetch(`${host}/auth/send-verification-mail`, {
         method: 'POST',
         body: JSON.stringify({ email }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       })
     ).json();
   } catch (e) {
