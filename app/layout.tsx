@@ -2,6 +2,8 @@ import { WebSocketProvider } from './lib/context/SocketContext';
 import { Navbar } from "@/components/Navbar/Navbar";
 
 import './globals.css';
+import React from 'react';
+import { UserProvider } from './lib/context/UserContext';
 
 export default async function RootLayout({
   children,
@@ -11,10 +13,12 @@ export default async function RootLayout({
   return (
     <html>
       <body>
-        <Navbar/>
-        <WebSocketProvider>
-          {children}
-        </WebSocketProvider>
+        <UserProvider>
+          <Navbar/>
+          <WebSocketProvider>
+            {children}
+          </WebSocketProvider>
+        </UserProvider>
       </body>
     </html>
   );

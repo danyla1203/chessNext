@@ -1,7 +1,7 @@
+import Link from 'next/link';
+
 import { Profile } from './Profile';
 import './Navbar.scss';
-import Link from 'next/link';
-import { UserProvider } from '@/app/lib/context/UserContext';
 
 export function Navbar() {
   return (
@@ -12,9 +12,7 @@ export function Navbar() {
           <Link href="/">Home</Link>
         </li>
       </ul>
-      <UserProvider>
-        <Profile />
-      </UserProvider>
+      <Profile />
     </div>
   );
 }
