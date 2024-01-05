@@ -7,7 +7,8 @@ import { UserContext } from '@/app/lib/context/UserContext';
 
 export function Profile() {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const user = React.useContext(UserContext);
+
+  const { profile } = React.useContext(UserContext);
   const click = (event: any) => {
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
@@ -17,7 +18,7 @@ export function Profile() {
 
   return (
     <div className="navbar__user">
-      {user ? (
+      {profile ? (
         <AuthorizedMenu
           handleClick={click}
           handleClose={close}

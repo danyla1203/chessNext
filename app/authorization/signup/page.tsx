@@ -1,16 +1,24 @@
 'use client'
 
+import { UserContext } from "@/app/lib/context/UserContext";
 import { emailVerification } from "@/request/emailVerification";
 import Link from "next/link";
-import { useState } from 'react';
+import { useRouter } from "next/navigation";
+import { useState, useContext, useEffect } from 'react';
 
 export default function Signup() {
   const [ email, setEmail ] = useState('');
+  const router = useRouter();
+  const { profile } = useContext(UserContext);
 
   const verifyEmail = async () => {
-    const body = { email }
-    await emailVerification(body);
+    const res = await emailVerification({ email });
+    if (res.message === 'ok') router.push('/signup/mail-sent');
   }
+
+  useEffect(() => {
+    if (profile) router.push('/')
+  }, [profile, router]);
 
   return (
     <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">

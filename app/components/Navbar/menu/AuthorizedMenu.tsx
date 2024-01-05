@@ -8,7 +8,9 @@ export function AuthorizedMenu({
   handleClick,
   handleClose,
 }: any) {
-  const user = React.useContext(UserContext);
+  const { profile } = React.useContext(UserContext);
+
+  if (!profile) throw Error('No profile in User context');
 
   const logout = () => {
     setAnchor(null);
@@ -21,7 +23,7 @@ export function AuthorizedMenu({
         onClick={handleClick}
         onMouseOver={handleClick}
       >
-        {user?.name}
+        {profile.name}
       </Button>
       <Menu
         anchorEl={anchor}

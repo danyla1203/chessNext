@@ -1,19 +1,34 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { userLogin } from '@/request/login';
+import { getProfile } from '@/request/userProfile';;
+import { useRouter } from 'next/navigation'
+import React from 'react';
+import { UserContext } from '@/app/lib/context/UserContext';
 
 export default function Login() {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
+  const { profile, updateUser } = React.useContext(UserContext);
+
+  const router = useRouter();
 
   const login = async () => {
     const data = {
       email,
       password
     }
-    await userLogin(data);
+    const { access } = await userLogin(data);
+    if (access) {
+      await updateUser(await getProfile(access));
+      router.push('/');
+    }
   }
+
+  useEffect(() => {
+    if (profile) router.push('/')
+  }, [profile, router]);
 
   return (
     <form>
