@@ -1,15 +1,13 @@
 'use client'
 
 import { useNotification } from "@/app/lib/context/NotificationContext";
-import { UserContext } from "@/app/lib/context/UserContext";
 import { emailVerification } from "@/app/lib/request";
 import { useRouter } from "next/navigation";
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 export default function Signup() {
   const [ email, setEmail ] = useState('');
   const router = useRouter();
-  const { profile } = useContext(UserContext);
   const { addNotification } = useNotification();
 
   const verifyEmail = async () => {

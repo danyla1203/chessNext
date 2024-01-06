@@ -2,8 +2,7 @@
 
 import { useState, useContext } from 'react';
 import { useSearchParams } from "next/navigation";
-import Link from 'next/link';
-import { createUser } from '@/app/lib/request/createUser';
+import { createUser } from '@/app/lib/request';
 import { UserContext } from '@/app/lib/context/UserContext';
 import { useNotification } from '@/app/lib/context/NotificationContext';
 

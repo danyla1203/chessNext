@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter, useSearchParams } from "next/navigation";
 import { codeConfirm } from '@/app/lib/request';
 import { useNotification } from '@/app/lib/context/NotificationContext';
