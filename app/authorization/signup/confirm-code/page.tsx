@@ -14,7 +14,7 @@ export default function ConfirmCode() {
   const verifyCode = async () => {
     const res = await codeConfirm(code, email || '');
     if (res.message === 'ok') {
-      router.push('/authorization/signup/complete-signup');
+      router.push(`/authorization/signup/complete-signup?email=${email}`);
     }
   }
 

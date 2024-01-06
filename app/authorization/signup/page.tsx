@@ -1,7 +1,7 @@
 'use client'
 
 import { UserContext } from "@/app/lib/context/UserContext";
-import { emailVerification } from "@/request/emailVerification";
+import { emailVerification } from "@/app/lib/request";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useContext, useEffect } from 'react';

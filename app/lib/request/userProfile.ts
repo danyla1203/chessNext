@@ -1,9 +1,9 @@
 export const getProfile = async (accessToken: string) => {
-  const host = process.env.API_HOST as string;
+  const host = process.env.NEXT_PUBLIC_API_HOST as string;
   try {
     return (await fetch(`${host}/user`, {
       headers: {
-        Authorization: accessToken,
+        Authorization: 'Bearer ' + accessToken,
       },
     })).json();
   } catch (e) {
