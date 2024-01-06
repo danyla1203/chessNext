@@ -1,15 +1,15 @@
 'use client'
 
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useSearchParams } from "next/navigation";
 import { createUser } from '@/app/lib/request';
-import { UserContext } from '@/app/lib/context/UserContext';
+import { useUserState } from '@/app/lib/context/UserContext';
 import { useNotification } from '@/app/lib/context/NotificationContext';
 
 export default function CompleteSignup() {
   const [ userName, setName ] = useState('');
   const [ password, setPassword ] = useState('');
-  const { updateUser } = useContext(UserContext);
+  const { updateUser } = useUserState()
   const { addNotification } = useNotification();
 
   const email = useSearchParams().get('email'); 

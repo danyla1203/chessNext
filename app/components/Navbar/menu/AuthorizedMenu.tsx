@@ -1,6 +1,5 @@
-import * as React from 'react';
 import { Button, Link, Menu, MenuItem } from '@mui/material';
-import { UserContext } from '@/app/lib/context/UserContext';
+import { useUserState } from '@/app/lib/context/UserContext';
 
 export function AuthorizedMenu({
   anchor,
@@ -8,7 +7,7 @@ export function AuthorizedMenu({
   handleClick,
   handleClose,
 }: any) {
-  const { profile } = React.useContext(UserContext);
+  const { profile } = useUserState();
 
   if (!profile) throw Error('No profile in User context');
 

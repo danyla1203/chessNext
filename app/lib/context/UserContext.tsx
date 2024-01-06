@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { getProfile } from "@/app/lib/request";
 
 type Profile = {
@@ -20,6 +20,14 @@ export const UserContext = createContext<UserState>({
     throw new Error('User context is not set');
   }
 });
+
+export const useUserState = () => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('No context provided');
+  }
+  return context;
+}
 
 export const UserProvider = ({ children }: {
   children: React.ReactNode;

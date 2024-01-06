@@ -1,14 +1,14 @@
 'use client'
 
-import * as React from 'react';
+import { useState } from 'react';
 import { AnonymousMenu } from './menu/AnonymousMenu';
 import { AuthorizedMenu } from './menu/AuthorizedMenu';
-import { UserContext } from '@/app/lib/context/UserContext';
+import { useUserState } from '@/app/lib/context/UserContext';
 
 export function Profile() {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
-  const { profile } = React.useContext(UserContext);
+  const { profile } = useUserState()
   const click = (event: any) => {
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);

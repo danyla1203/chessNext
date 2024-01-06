@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import React from 'react';
-import { UserContext } from '@/app/lib/context/UserContext';
+import { useUserState } from '@/app/lib/context/UserContext';
 import { userLogin, getProfile } from '@/app/lib/request';
 import { useNotification } from '@/app/lib/context/NotificationContext';
 
 export default function Login() {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
-  const { profile, updateUser } = React.useContext(UserContext);
+  const { updateUser } = useUserState();
   const { addNotification } = useNotification();
 
   const router = useRouter();
