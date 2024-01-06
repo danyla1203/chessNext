@@ -5,11 +5,13 @@ import { useRouter } from 'next/navigation'
 import React from 'react';
 import { UserContext } from '@/app/lib/context/UserContext';
 import { userLogin, getProfile } from '@/app/lib/request';
+import { useNotification } from '@/app/lib/context/NotificationContext';
 
 export default function Login() {
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
   const { profile, updateUser } = React.useContext(UserContext);
+  const { addNotification } = useNotification();
 
   const router = useRouter();
 
@@ -22,12 +24,8 @@ export default function Login() {
     if (access) {
       await updateUser(await getProfile(access));
       router.push('/');
-    }
+    } else addNotification('error', 'Login failed');
   }
-
-  useEffect(() => {
-    if (profile) router.push('/')
-  }, [profile, router]);
 
   return (
     <form>

@@ -5,21 +5,25 @@ import { useSearchParams } from "next/navigation";
 import Link from 'next/link';
 import { createUser } from '@/app/lib/request/createUser';
 import { UserContext } from '@/app/lib/context/UserContext';
+import { useNotification } from '@/app/lib/context/NotificationContext';
 
 export default function CompleteSignup() {
   const [ userName, setName ] = useState('');
   const [ password, setPassword ] = useState('');
   const { updateUser } = useContext(UserContext);
+  const { addNotification } = useNotification();
 
   const email = useSearchParams().get('email'); 
 
   const signUp = async () => {
     const res = await createUser(email || '', userName, password);
-    if (res) {
+    if (res.error) {
+      addNotification('error', res.error);
+    } else {
       const { profile, access, refresh } = res;
       updateUser(profile);
-      localStorage.setItem('access', access);
-      localStorage.setItem('refresh', refresh);
+      localStorage.setItem('accessToken', access);
+      localStorage.setItem('refreshToken', refresh);
     }
   }
 
@@ -53,7 +57,7 @@ export default function CompleteSignup() {
         />
       </div>
       <button onClick={signUp} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-        <Link href={`/`}>Create account</Link>
+        Create account
       </button>
     </form>
   )

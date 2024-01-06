@@ -4,10 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from "next/navigation";
 import { codeConfirm } from '@/app/lib/request';
+import { useNotification } from '@/app/lib/context/NotificationContext';
 
 export default function ConfirmCode() {
   const [code, setCode] = useState('');
   const router = useRouter();
+  const { addNotification } = useNotification();
 
   const email = useSearchParams().get('email');
 
@@ -15,7 +17,7 @@ export default function ConfirmCode() {
     const res = await codeConfirm(code, email || '');
     if (res.message === 'ok') {
       router.push(`/authorization/signup/complete-signup?email=${email}`);
-    }
+    } else addNotification('error', res.message);
   }
 
   return (
@@ -24,10 +26,10 @@ export default function ConfirmCode() {
         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
           Code
         </label>
-        <input onChange={(e) => setCode(e.target.value)} value={code} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="Email"/>
+        <input onChange={(e) => setCode(e.target.value)} value={code} className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="code" type="text" placeholder="Code"/>
       </div>
       <button onClick={verifyCode} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-        <Link href={`/authorization/signup/mail-sent`}>Send confirmation email</Link>
+        Send code
       </button>
     </form>
   )
