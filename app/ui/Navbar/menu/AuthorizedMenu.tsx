@@ -8,12 +8,15 @@ export function AuthorizedMenu({
   handleClick,
   handleClose,
 }: any) {
-  const { profile } = useUserState();
+  const { profile, removeUser } = useUserState();
 
   if (!profile) throw Error('No profile in User context');
 
   const logout = () => {
     setAnchor(null);
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken');
+    removeUser();
   };
   return (
     <>

@@ -12,11 +12,15 @@ type Profile = {
 export type UserState = {
   profile: Profile | null;
   updateUser: (data: any) => void;
+  removeUser: () => void;
 };
 
 export const UserContext = createContext<UserState>({
   profile: null,
   updateUser: () => {
+    throw new Error('User context is not set');
+  },
+  removeUser: () => {
     throw new Error('User context is not set');
   },
 });
@@ -51,6 +55,9 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     profile,
     updateUser: (profile: Profile) => {
       setProfile(profile);
+    },
+    removeUser: () => {
+      setProfile(null);
     },
   };
 
