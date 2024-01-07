@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { getProfile } from "@/app/lib/request";
+import { useRouter } from "next/navigation";
 
 type Profile = {
   id: number;
@@ -34,20 +35,35 @@ export const UserProvider = ({ children }: {
 }) => {
 
   const [ profile, setProfile ] = useState<Profile | null>(null);
+  const [ isLoaded, setStatus ] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     // TODO: Potential XSS vulnerability, change it in future
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
-      getProfile(accessToken).then((profile) => setProfile(profile))
-    }
+      getProfile(accessToken)
+      .then((profile) => {
+        if (!profile.error) {
+          setProfile(profile);
+        }
+        setStatus(true)
+      })
+      .catch(() => setStatus(true));
+    } else setStatus(true);
   }, []);
-
   const stateUser: UserState = {
     profile,
     updateUser: (profile: Profile) => {
       setProfile(profile);
     }
+  }
+
+  if (!isLoaded) {
+    return (
+      <div>Loading...</div>
+    )
   }
 
   return (

@@ -1,5 +1,6 @@
-import { Button, Link, Menu, MenuItem } from '@mui/material';
+import { Button, Menu, MenuItem } from '@mui/material';
 import { useUserState } from '@/app/lib/context/UserContext';
+import Link from 'next/link';
 
 export function AuthorizedMenu({
   anchor,

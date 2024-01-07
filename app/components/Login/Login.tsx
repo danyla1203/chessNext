@@ -19,9 +19,11 @@ export default function Login() {
       email,
       password
     }
-    const { access } = await userLogin(data);
+    const { access, refresh } = await userLogin(data);
     if (access) {
       await updateUser(await getProfile(access));
+      localStorage.setItem('accessToken', access);
+      localStorage.setItem('refreshToken', refresh);
       router.push('/');
     } else addNotification('error', 'Login failed');
   }
