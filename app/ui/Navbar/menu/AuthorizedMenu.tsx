@@ -1,6 +1,7 @@
 import { Button, Menu, MenuItem } from '@mui/material';
-import { useUserState } from '@/context/UserContext';
 import Link from 'next/link';
+import { useUserState } from '@/context/UserContext';
+import { userLogout } from '@/app/lib/request';
 
 export function AuthorizedMenu({
   anchor,
@@ -12,8 +13,9 @@ export function AuthorizedMenu({
 
   if (!profile) throw Error('No profile in User context');
 
-  const logout = () => {
+  const logout = async () => {
     setAnchor(null);
+    await userLogout();
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     removeUser();
