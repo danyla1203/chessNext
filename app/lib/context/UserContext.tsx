@@ -1,7 +1,6 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { getProfile } from '@/requests';
 
 type Profile = {
@@ -33,8 +32,6 @@ export const useUserState = () => {
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoaded, setStatus] = useState(false);
-
-  const router = useRouter();
 
   useEffect(() => {
     // TODO: Potential XSS vulnerability, change it in future
