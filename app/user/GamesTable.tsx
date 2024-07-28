@@ -1,5 +1,4 @@
 import {
-  User,
   Table,
   TableBody,
   TableHeader,
@@ -10,6 +9,7 @@ import {
 } from '@nextui-org/react';
 import { Profile } from '@/context/UserContext';
 import { RestructedGameResult } from '../game/types';
+import { GameResultPlayers } from './GameResultPlayers';
 
 export function GamesTable({ profile }: { profile: Profile }) {
   const renderCells = (game: RestructedGameResult, columnKey: string) => {
@@ -18,42 +18,11 @@ export function GamesTable({ profile }: { profile: Profile }) {
       case 'result':
         if (cellValue.winner) {
           return (
-            <div className="gap-5 flex items-center justify-center">
-              <User
-                name={
-                  cellValue.winner.userId === profile.userId
-                    ? 'You'
-                    : cellValue.winner.name
-                }
-                description={cellValue.winner.name}
-              >
-                {cellValue.winner.userId === profile.userId
-                  ? 'You'
-                  : cellValue.winner.name}
-              </User>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                width="24"
-                height="24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M5 12h14M12 5l7 7-7 7"></path>
-              </svg>
-
-              <User
-                name={
-                  cellValue.looser.userId === profile.userId
-                    ? 'You'
-                    : cellValue.looser.name
-                }
-                description={cellValue.looser.name}
-              ></User>
-            </div>
+            <GameResultPlayers
+              winner={cellValue.winner}
+              looser={cellValue.looser}
+              profile={profile}
+            />
           );
         }
         return <div className="flex justify-center">Draw</div>;
